@@ -36,4 +36,7 @@ public class Stack {
         }
         return stack[stack.length - 1];
     }
+    public boolean isEmpty() {
+        return stack == null || stack.length == 0;
+    }
 }
