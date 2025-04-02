@@ -1,47 +1,42 @@
 package ch.zhaw.it.thin.kellerautomat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Stack {
-    private List<String> stack;
+    private String[] stack;
 
-    public Stack() {
-        this.stack = new ArrayList<>();
+    public Stack(String[] stack) {
+        this.stack = stack;
     }
 
-    public void push(String element) {
-        stack.add(element);
+    public void push(String value) {
+        if (stack == null || stack.length == 0) {
+            stack = new String[1];
+            stack[0] = value;
+        } else {
+            String[] newStack = new String[stack.length + 1];
+            System.arraycopy(stack, 0, newStack, 0, stack.length);
+            newStack[stack.length] = value;
+            stack = newStack;
+        }
     }
 
     public String pop() {
-        if (stack.isEmpty()) {
-            throw new IllegalStateException("Cannot pop from an empty stack");
-        }
-        return stack.remove(stack.size() - 1);
-    }
-
-    public boolean containsOnlyResult() {
-        return stack.size() == 1;
-    }
-
-    public String getElementAtCurrentPosition() {
-        if (stack.isEmpty()) {
+        if (stack == null || stack.length == 0) {
             throw new IllegalStateException("Stack is empty");
         }
-        return stack.get(stack.size() - 1);
+        String value = stack[stack.length - 1];
+        String[] newStack = new String[stack.length - 1];
+        System.arraycopy(stack, 0, newStack, 0, stack.length - 1);
+        stack = newStack;
+        return value;
     }
 
-    public String spyPeekWithOffset(int offset) {
-        int position = stack.size() - 1 - offset;
-        if (position < 0 || position >= stack.size()) {
-            throw new IllegalStateException("Invalid offset: " + offset);
+    public String peek() {
+        if (stack == null || stack.length == 0) {
+            throw new IllegalStateException("Stack is empty");
         }
-        return stack.get(position);
+        return stack[stack.length - 1];
     }
-
-    @Override
-    public String toString() {
-        return stack.toString();
+    public boolean isEmpty() {
+        return stack == null || stack.length == 0;
     }
 }
