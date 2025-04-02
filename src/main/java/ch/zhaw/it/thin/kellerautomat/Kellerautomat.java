@@ -19,14 +19,16 @@ public class Kellerautomat {
     private static final char MULTIPLICATION_SIGN = '*';
 
     public void calculate(final boolean stepMode, final String input) throws InterruptedException {
+        // Remove all spaces from the input string
+        final String cleanedInput = input.replace(" ", "");
         final Stack stack = new Stack();
-        // map every char from the input string to a Character object and collect them into a list
-        final List<Character> inputChars = input.chars().mapToObj(c -> (char) c).toList();
-        // remove all spaces from the input string
-        final StringBuilder remainingChars = new StringBuilder(input);
+        // map every char from the cleaned input to a Character object and collect them into a list
+        final List<Character> inputChars = cleanedInput.chars().mapToObj(c -> (char) c).toList();
+        final StringBuilder remainingChars = new StringBuilder(cleanedInput);
         boolean isValid = true;
         int stepCount = 0;
         final Iterator<Character> iterator = inputChars.iterator();
+
         // iterate over the input string
         while (iterator.hasNext() && isValid) {
             stepCount++; // index to count the steps of the calculation
