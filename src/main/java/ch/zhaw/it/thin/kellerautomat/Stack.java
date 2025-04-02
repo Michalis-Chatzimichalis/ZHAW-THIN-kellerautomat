@@ -1,42 +1,47 @@
 package ch.zhaw.it.thin.kellerautomat;
 
-public class Stack {
-    private String[] stack;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Stack(String[] stack) {
-        this.stack = stack;
+public class Stack {
+    private List<String> stack;
+
+    public Stack() {
+        this.stack = new ArrayList<>();
     }
 
-    public void push(String value) {
-        if (stack == null || stack.length == 0) {
-            stack = new String[1];
-            stack[0] = value;
-        } else {
-            String[] newStack = new String[stack.length + 1];
-            System.arraycopy(stack, 0, newStack, 0, stack.length);
-            newStack[stack.length] = value;
-            stack = newStack;
-        }
+    public void push(String element) {
+        stack.add(element);
     }
 
     public String pop() {
-        if (stack == null || stack.length == 0) {
-            throw new IllegalStateException("Stack is empty");
+        if (stack.isEmpty()) {
+            throw new IllegalStateException("Cannot pop from an empty stack");
         }
-        String value = stack[stack.length - 1];
-        String[] newStack = new String[stack.length - 1];
-        System.arraycopy(stack, 0, newStack, 0, stack.length - 1);
-        stack = newStack;
-        return value;
+        return stack.remove(stack.size() - 1);
     }
 
-    public String peek() {
-        if (stack == null || stack.length == 0) {
+    public boolean containsOnlyResult() {
+        return stack.size() == 1;
+    }
+
+    public String getElementAtCurrentPosition() {
+        if (stack.isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return stack[stack.length - 1];
+        return stack.get(stack.size() - 1);
     }
-    public boolean isEmpty() {
-        return stack == null || stack.length == 0;
+
+    public String spyPeekWithOffset(int offset) {
+        int position = stack.size() - 1 - offset;
+        if (position < 0 || position >= stack.size()) {
+            throw new IllegalStateException("Invalid offset: " + offset);
+        }
+        return stack.get(position);
+    }
+
+    @Override
+    public String toString() {
+        return stack.toString();
     }
 }
