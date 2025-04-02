@@ -19,7 +19,6 @@ public class Kellerautomat {
 
     public void runMode(Stack stack) {
         while (!stack.isEmpty()) {
-
         }
     }
 
