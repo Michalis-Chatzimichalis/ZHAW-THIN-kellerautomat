@@ -57,7 +57,7 @@ public class Kellerautomat {
         if (!stack.containsOnlyResult()) {
             isValid = false;
         }
-        printResult(input, stack, isValid);
+        printResult(cleanedInput, stack, isValid);
     }
 
     // prints the current step of the calculation with some nicer-ish formatting

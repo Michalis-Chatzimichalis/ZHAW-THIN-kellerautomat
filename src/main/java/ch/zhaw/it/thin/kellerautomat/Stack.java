@@ -4,22 +4,17 @@ public class Stack {
     private String[] stack;
 
     public Stack() {
-        this.stack = new String[]{};
+        stack = new String[]{};
     }
 
     public void push(String value) {
-        if (isEmpty()) {
-            stack = new String[1];
-            // create a new stack and add the value to it if the stack is empty at the beginning
-            stack[0] = value;
-        } else {
-            // create a new stack and add the value to it if the stack is not empty
-            String[] newStack = new String[stack.length + 1];
-            // copies the stack to the new stack, srcPos/destPos being the start index of the new/old array
-            System.arraycopy(stack, 0, newStack, 0, stack.length);
-            newStack[stack.length] = value;
-            stack = newStack;
+        String[] newStack = new String[stack.length + 1];
+        // copy the old stack to the new stack
+        for (int i = 0; i < stack.length; i++) {
+            newStack[i] = stack[i];
         }
+        newStack[stack.length] = value;
+        stack = newStack;
     }
 
     public String pop() {
@@ -29,7 +24,9 @@ public class Stack {
         // returns the new stack minus the last element of the stack and saves it to an array copy
         String[] newStack = new String[stack.length - 1];
         // copies the stack to the new stack, srcPos/destPos being the start index of the old/new array
-        System.arraycopy(stack, 0, newStack, 0, stack.length - 1);
+        for (int i = 0; i < newStack.length; i++) {
+            newStack[i] = stack[i];
+        }
         stack = newStack;
         return value;
     }
