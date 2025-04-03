@@ -8,11 +8,13 @@ public class Stack {
     }
 
     public void push(String value) {
+        // create a new stack with size+1 of the old array to add the new value
         String[] newStack = new String[stack.length + 1];
         // copy the old stack to the new stack
         for (int i = 0; i < stack.length; i++) {
             newStack[i] = stack[i];
         }
+        // add the new value to the end of the new stack
         newStack[stack.length] = value;
         stack = newStack;
     }
@@ -21,13 +23,14 @@ public class Stack {
         if (isEmpty()) throw new IllegalStateException("Stack is empty");
         // get the top element, this value is returned but removed from the stack
         String value = stack[stack.length - 1];
-        // returns the new stack minus the last element of the stack and saves it to an array copy
+        // create a new stack with size-1 of the old array to remove the last value
         String[] newStack = new String[stack.length - 1];
-        // copies the stack to the new stack, srcPos/destPos being the start index of the old/new array
+        // copy the stack to the new stack, excluding the last element
         for (int i = 0; i < newStack.length; i++) {
             newStack[i] = stack[i];
         }
         stack = newStack;
+        // return the value that was popped
         return value;
     }
 
