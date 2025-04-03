@@ -67,15 +67,21 @@ public class Kellerautomat {
 
     // peeks the top two elements of the stack and checks if they are numbers
     private boolean containsTwoPreviousNumbers(Stack stack) {
+        // Ensure that the stack has at least 2 elements
+        if (stack.isEmpty() || stack.getLength() < 2) {
+            return false;
+        }
         try {
-            parseInt(stack.peek(0));
-            parseInt(stack.peek(1));
+            parseInt(stack.peek(0));  // Access the top element
+            parseInt(stack.peek(1));  // Access the second-to-top element
         } catch (NumberFormatException e) {
+            // Return false if any of these values are not valid integers
             return false;
         }
 
-        return true;
+        return true;  // Both values are integers
     }
+
 
     // removes the single numbers from the stack, performs the calculation and replaces the numbers with the result
     private void performCalculation(Stack stack, char currentChar) {

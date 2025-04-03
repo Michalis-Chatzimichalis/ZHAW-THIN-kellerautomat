@@ -61,4 +61,8 @@ public class Stack {
         }
         return sb.toString();
     }
+
+    public int getLength() {
+        return stack.length;
+    }
 }
